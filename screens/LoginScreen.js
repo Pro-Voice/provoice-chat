@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native'
 import { Button, Image, Input } from 'react-native-elements'
 import { StatusBar } from 'expo-status-bar'
@@ -22,7 +22,26 @@ const LoginScreen = ({ navigation }) => {
 
     }, [])
 
+
+
+    useLayoutEffect(() => {
+        navigation.setOptions({
+
+
+            headerTitleAlign: "center",
+
+
+        })
+
+
+    }, [navigation])
+
     const signIn = () => {
+        auth.signInWithEmailAndPassword(email, password).then(() => {
+
+        }).catch((error) => {
+            alert(error);
+        })
 
     }
 
@@ -32,7 +51,9 @@ const LoginScreen = ({ navigation }) => {
             <Image source={{ uri: "https://blog.mozilla.org/internetcitizen/files/2018/08/signal-logo.png" }} style={{ height: 200, width: 200 }} />
             <View style={styles.inputContainer}>
                 <Input placeholder="Enter Email" autoFocus type="email" value={email} onChangeText={(text) => setEmail(text)} />
-                <Input placeholder="Enter Password" secureTextEntry autoFocus type="password" value={password} onChangeText={(text) => setPassword(text)} />
+                <Input placeholder="Enter Password" secureTextEntry autoFocus type="password" value={password} onChangeText={(text) => setPassword(text)}
+                    onSubmitEditing={signIn}
+                />
             </View>
 
             <Button containerStyle={styles.button} onPress={signIn} title="Login" />
