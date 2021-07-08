@@ -26,14 +26,8 @@ const LoginScreen = ({ navigation }) => {
 
     useLayoutEffect(() => {
         navigation.setOptions({
-
-
             headerTitleAlign: "center",
-
-
         })
-
-
     }, [navigation])
 
     const signIn = () => {
