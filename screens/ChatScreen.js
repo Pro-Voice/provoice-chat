@@ -27,7 +27,10 @@ const ChatScreen = ({ navigation, route }) => {
                     flexDirection: 'row',
                     alignItems: 'center',
                 }}>
-                    <Avatar source={{ uri: "https://cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png" }} />
+                    <Avatar source={{
+                        uri: messages[0]?.data.photoURL,
+                        // || "https://cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png"
+                    }} rounded />
                     <Text style={{ color: "white", marginLeft: 10, fontWeight: "700", textTransform: "capitalize" }} >{route.params.chatName}</Text>
                 </View>
             ),
@@ -56,7 +59,7 @@ const ChatScreen = ({ navigation, route }) => {
                 </View>
             )
         })
-    }, [navigation])
+    }, [navigation, messages])
 
     const sendMessage = () => {
         Keyboard.dismiss();
@@ -97,7 +100,7 @@ const ChatScreen = ({ navigation, route }) => {
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}  >
 
                     <>
-                        <ScrollView>
+                        <ScrollView contentContainerStyle={{ paddingTop: 15, }}>
                             {messages.map(({ id, data }) => data.email === auth.currentUser.email ?
                                 (<View key={id} style={styles.receiver} >
                                     <Avatar
@@ -113,20 +116,23 @@ const ChatScreen = ({ navigation, route }) => {
 
 
                                 </View>) :
-                                (<View style={styles.sender} >
+                                (<View key={id} style={styles.sender} >
                                     <Avatar position="absolute" containerStyle={{
                                         position: "absolute",
                                         bottom: -15,
                                         left: -5,
                                     }}
-                                        bottom={-15} left={-5} />
+                                        bottom={-15} left={-5} rounded size={30} source={{
+                                            uri: data.photoURL,
+                                        }} />
                                     <Text style={styles.senderText} >{data.message}</Text>
+                                    <Text style={styles.senderName} >{data.displayName}</Text>
                                 </View>))
 
                             }
                         </ScrollView>
                         <View style={styles.footer}>
-                            <TextInput value={input} onChangeText={(text) => setInput(text)} onSubmitEditing={sendMessage} placeholder="signal message " style={styles.testinput} />
+                            <TextInput value={input} onChangeText={(text) => setInput(text)} onSubmitEditing={sendMessage} placeholder="Send Signal message " style={styles.testinput} />
                             <TouchableOpacity activeOpacity={0.5} onPress={sendMessage}>
                                 <Ionicons name="send" size={24} color="#2B68E6" />
                             </TouchableOpacity>
@@ -165,6 +171,24 @@ const styles = StyleSheet.create({
         margin: 15,
         maxWidth: "80%",
         position: "relative",
+    },
+    senderText: {
+        color: "white",
+        fontWeight: "500",
+        marginLeft: 10,
+        marginBottom: 15,
+    },
+    receiverText: {
+        color: "black",
+        fontWeight: "500",
+        marginLeft: 10,
+        // marginBottom: 15,
+    },
+    senderName: {
+        left: 10,
+        paddingRight: 10,
+        fontSize: 10,
+        color: "white",
     },
     footer: {
         flexDirection: "row",
