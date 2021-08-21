@@ -5,12 +5,14 @@ import "firebase/firestore";
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDxBUSO_aUfUKKKy6MYnnz2jkYNigQo7xE",
-    authDomain: "signal-clone-c974b.firebaseapp.com",
-    projectId: "signal-clone-c974b",
-    storageBucket: "signal-clone-c974b.appspot.com",
-    messagingSenderId: "678692806749",
-    appId: "1:678692806749:web:2271fdf4a98b58a8802db4"
+    apiKey: "AIzaSyArlu6QqfHWznEoCeN0unsvkEmtj8KPNkM",
+    authDomain: "provoice-client.firebaseapp.com",
+    databaseURL: "https://provoice-client-default-rtdb.firebaseio.com",
+    projectId: "provoice-client",
+    storageBucket: "provoice-client.appspot.com",
+    messagingSenderId: "873807765471",
+    appId: "1:873807765471:web:0b36475636ae55265bee6a",
+    measurementId: "G-0J7M1ZRQ2X"
 };
 
 let app;

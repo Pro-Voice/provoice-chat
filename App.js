@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, LogBox } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -16,10 +16,11 @@ import ChatScreen from './screens/ChatScreen';
 
 
 const Stack = createStackNavigator();
+LogBox.ignoreLogs(['Setting a timer']);
 
-// 
+//
 const globleScreenOptions = {
-  headerStyle: { backgroundColor: "#2C6BED" },
+  headerStyle: { backgroundColor: "#006699" },
   headerTitleStyle: { color: "white" },
   headerTintColor: "white"
 }
@@ -29,7 +30,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        //  initialRouteName="Home" 
+        //  initialRouteName="Home"
 
         screenOptions={globleScreenOptions}>
         <Stack.Screen name="Login" component={LoginScreen} />
